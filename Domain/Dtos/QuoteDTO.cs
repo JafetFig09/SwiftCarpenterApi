@@ -14,7 +14,7 @@ namespace swiftcarpenterApi.Domain.Dtos
         public decimal Total { get; set; }
         public DateTime? SaleDate { get; set; }
 
-        //public string ProductName { get; set; }
+    
         public virtual ICollection<DetailQuoteDTO> DetailQuotes { get; set; } = new List<DetailQuoteDTO>();
 
     }

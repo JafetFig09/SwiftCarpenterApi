@@ -12,6 +12,6 @@ namespace swiftcarpenterApi.Domain.Dtos
 
         //public string Email { get; set; } = null!;
 
-       public virtual ICollection<QuoteDTO> Quotes { get; set; } = new List<QuoteDTO>();
+       public  ICollection<QuoteDTO> Quotes { get; set; } = new List<QuoteDTO>();
     }
 }

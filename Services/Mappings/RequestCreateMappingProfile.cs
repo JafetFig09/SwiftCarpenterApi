@@ -1,28 +1,32 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using SwiftCarpenter.Domain.Entities;
 using swiftcarpenterApi.Domain.Dtos;
+using swiftcarpenterApi.Services.Features.Products;
 
-namespace swiftcarpenterApi.Services.Mappings
+public class RequestCreateMappingProfile : Profile
 {
-    public class RequestCreateMappingProfile : Profile 
+
+    public RequestCreateMappingProfile()
     {
-        public RequestCreateMappingProfile()
-        {
-            // Configuración del mapeo de QuoteCreateDTO a Quote
-            CreateMap<QuoteCreateDTO, Quote>()
-                 .AfterMap
-                 (
-                     (src, dest) =>
-                     {
-                        
-                         dest.DateQuote = DateTime.Now;
-                     }
-                 );
-            CreateMap<DetailQuoteCreateDTO, DetailQuote>();
-         
+        //this._productService = productService;
 
+        //CreateMap<QuoteCreateDTO, Quote>()
+        //    .AfterMap((src, dst) =>
+        //    {
+        //        dst.DateQuote = DateTime.Now;
+        //    })
+        //    .ForMember(dest => dest.DetailQuotes, opt => opt.MapFrom(src => src.DetailQuotes));
 
-        }
+        //CreateMap<DetailQuoteCreateDTO, DetailQuote>()
+        //    .AfterMap(async (src, dst) =>
+        //    {
+        //        var product = await _productService.GetById(src.ProductId);
+        //        if (product == null) { return; }
+        //        dst.Subtotal = product.Price * src.Amount;
+        //    });
+        CreateMap<CustomerCreateDTO, Customer>();
+
     }
-    
+
 }

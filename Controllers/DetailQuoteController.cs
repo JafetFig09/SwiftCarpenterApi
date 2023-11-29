@@ -46,10 +46,10 @@
 //            var detailQuoteDto = _mapper.Map<DetailQuoteDTO>(detailQuote);
 //            return Ok(detailQuoteDto);
 //        }
-   
 
-//        [HttpPost]
-//        public async Task<IActionResult> Add(DetailQuoteCreateDTO detailQuoteDto)
+
+//        [HttpPost("Quotes/{id:int}")]
+//        public async Task<IActionResult> Add(int Id,DetailQuoteCreateDTO detailQuoteDto)
 //        {
 //            var product = await _productService.GetById(detailQuoteDto.ProductId);
 
@@ -61,7 +61,7 @@
 
 //            var detailQuote = new DetailQuote
 //            {
-//                QuoteId = detailQuoteDto.QuoteId,
+//                QuoteId = Id,
 //                ProductId = detailQuoteDto.ProductId,
 //                Amount = detailQuoteDto.Amount,
 //                Subtotal = subtotal
@@ -72,7 +72,7 @@
 //            var dto = _mapper.Map<DetailQuoteDTO>(detailQuote);
 
 //            return CreatedAtAction(nameof(GetById), new { id = detailQuote.Id }, dto);
-        
+
 
 //        }
 
@@ -99,4 +99,4 @@
 //        }
 
 //    }
-//}
+

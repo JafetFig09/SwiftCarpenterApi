@@ -31,7 +31,7 @@ namespace swiftcarpenterApi.Services.Features.DetailQuotes
 
         public async Task Update( DetailQuote detailQuoteUpdate)
         {
-            var detailQuote = _detailQuoteRepository.GetById( detailQuoteUpdate.Id);
+            var detailQuote = await _detailQuoteRepository.GetById( detailQuoteUpdate.Id);
 
             if (detailQuote.Id > 0 ) 
             {
@@ -41,7 +41,7 @@ namespace swiftcarpenterApi.Services.Features.DetailQuotes
 
         public async Task Delete( int id)
         {
-            var detailQuote = _detailQuoteRepository.GetById( id);
+            var detailQuote = await _detailQuoteRepository.GetById( id);
 
             if( detailQuote.Id > 0 ) 
             {

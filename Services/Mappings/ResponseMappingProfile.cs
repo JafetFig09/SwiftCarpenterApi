@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using Microsoft.AspNetCore.Routing.Constraints;
 using SwiftCarpenter.Domain.Entities;
 using swiftcarpenterApi.Domain.Dtos;
@@ -19,10 +19,7 @@ namespace swiftcarpenterApi.Services.Mappings
                  .ForMember(
                         dest => dest.CustomerName,
                          opt => opt.MapFrom(src => src.Customer.CustomerName))
-                  //.ForMember(
-                  //      dest => dest.ProductName,
-                  //      opt => opt.MapFrom
-                  //      ( src => src.DetailQuotes.First().Product.ProductType.TypeName))
+                 
                   .ForMember(
                          dest => dest.Total,
                          opt => opt.MapFrom(src => src.DetailQuotes.Sum(dq => dq.Subtotal)));
@@ -74,6 +71,8 @@ namespace swiftcarpenterApi.Services.Mappings
                 ;
 
             CreateMap<Customer, CustomerResponseDTO>();
+
+
 
 
         }

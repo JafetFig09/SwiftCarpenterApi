@@ -23,17 +23,8 @@ namespace swiftcarpenterApi.Controllers
             this._quoteService = quoteService;
         }
 
-        //El usuario no necesita ver a los demas usuarios
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var customers = await _customerService.GetAll();
-
-        //    var customersDto = _mapper.Map<IEnumerable<CustomerResponseDTO>>(customers);
-        //    return Ok(customersDto);
-        //}
-
-        [HttpGet("{id:int}")]
+        //Optiene los datos del cliente
+        [HttpGet("{Customerid:int}")]
         public async Task<IActionResult> GetByIdCustomeer(int id)
         {
             var customer = await _customerService.GetById(id);
@@ -46,8 +37,8 @@ namespace swiftcarpenterApi.Controllers
             return Ok(dtoCustomer);
         }
 
-
-        [HttpGet("{id:int}/Quotes")]
+        //Optiene todas las cotizaciones del Cliente
+        [HttpGet("{customerid:int}/Quotes")]
         public async Task<IActionResult> GetById(int id)
         {
             var customer = await _customerService.GetById(id);
@@ -60,26 +51,43 @@ namespace swiftcarpenterApi.Controllers
             return Ok(dtoCustomer);
         }
 
-        //[HttpGet("{customerId:int}/Quotes/{quoteId:int}")]
-        //public async Task<IActionResult> GetQuote(int customerId, int quoteId)
-        //{
-        //    var customer = await _customerService.GetById(customerId);
+        //Optiene una cotización especifica del cliente
 
-        //    if (customer.Id <= 0)
-        //    {
-        //        return NotFound("Cliente no encontrado");
-        //    }
+        [HttpGet("{customerId:int}/Quotes/{quoteId:int}")]
+        public async Task<IActionResult> GetCustomerQuote(int customerId, int quoteId)
+        {
+            var customer = await _customerService.GetById(customerId);
 
-        //    var quote = customer.Quotes.FirstOrDefault(q => q.Id == quoteId);
+            if (customer.Id <= 0)
+            {
+                return NotFound("Cliente no encontrado");
+            }
 
-        //    if (quote == null)
-        //    {
-        //        return NotFound("Cotización no encontrada");
-        //    }
+            var quote = await _quoteService.GetById(quoteId);
 
-        //    var dtoQuote = _mapper.Map<QuoteDTO>(quote);
-        //    return Ok(dtoQuote);
-        //}
+            if (quote == null || quote.CustomerId != customerId)
+            {
+                return NotFound("Cotización no encontrada para este cliente");
+            }
+
+            var dtoQuote = _mapper.Map<QuoteDTO>(quote);
+            return Ok(dtoQuote);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CustomerCreateDTO customer)
+        {
+            var entity = _mapper.Map<Customer>(customer);
+
+            await _customerService.Add(entity);
+            var dto = _mapper.Map<CustomerDTO>(entity);
+
+            return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
+
+        }
 
 
 
@@ -104,6 +112,8 @@ namespace swiftcarpenterApi.Controllers
             await _quoteService.Update(quoteUpdate);
             return NoContent();
         }
+
+
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)

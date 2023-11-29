@@ -31,7 +31,7 @@ namespace swiftcarpenterApi.Services.Features.Customers
         public async Task Update( Customer customerUpdate)
         {
 
-            var customer = GetById(customerUpdate.Id);
+            var customer = await GetById(customerUpdate.Id);
             if(customer.Id >0) 
             {
                 await _customerRepository.Update(customerUpdate);
@@ -42,7 +42,7 @@ namespace swiftcarpenterApi.Services.Features.Customers
 
         public async Task Delete( int id)
         {
-            var customer = GetById(id);
+            var customer = await GetById(id);
             if(customer.Id >0) 
             {
                 await _customerRepository.Delete(id);

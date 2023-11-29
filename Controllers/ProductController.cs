@@ -52,12 +52,12 @@ namespace swiftcarpenterApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _productService.Delete(id);
-            return NoContent();
+        //[HttpDelete("{id:int}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await _productService.Delete(id);
+        //    return NoContent();
 
-        }
+        //}
     }
 }

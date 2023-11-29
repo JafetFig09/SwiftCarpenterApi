@@ -33,8 +33,10 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
                  .ThenInclude(dq => dq.Product.ProductType).
                   FirstOrDefaultAsync(q => q.Id == id);
 
+           
             return quote ?? new Quote();
         }
+
 
         public async Task Add(Quote quote)
         {

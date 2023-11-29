@@ -16,10 +16,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(ResponseMappingProfile).Assembly);
 
 
-;
+
 var Configuration = builder.Configuration;
 
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddAutoMapper(typeof(RequestCreateMappingProfile).Assembly);
+
+
 builder.Services.AddTransient<ProductRepository>();
 
 builder.Services.AddScoped<QuoteService>();
