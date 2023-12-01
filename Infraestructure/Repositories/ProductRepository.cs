@@ -25,6 +25,35 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
 
             return products;
         }
+        public async Task<IEnumerable<ProductType>> GetProductType()
+        {
+            var productType = await _context.ProductTypes.ToListAsync();
+
+            return productType;
+        }
+
+        public async Task<IEnumerable<Material>> GetMaterialAll()
+        {
+            var material = await _context.Materials.ToListAsync();
+
+            return material;
+        }
+
+        public async Task<IEnumerable<Size>> GetSizesAll()
+        {
+            var sizes = await _context.Sizes
+                .Include(s => s.Products)
+                .ThenInclude(p => p.ProductType).ToListAsync();
+
+
+            return sizes;
+        }
+
+        public async Task<IEnumerable<Color>> GetColorAll()
+        {
+            var colors = await _context.Colors.ToListAsync(); 
+            return colors;
+        }
 
         public async Task<Product> GetById( int id)
         {

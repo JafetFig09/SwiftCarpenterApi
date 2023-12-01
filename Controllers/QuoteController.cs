@@ -54,10 +54,7 @@ namespace swiftcarpenterApi.Controllers
 
 
 
-        [HttpGet(")]
-      
 
-     
         [HttpPost]
         public async Task<IActionResult> Add(QuoteCreateDTO quoteCreate)
         {

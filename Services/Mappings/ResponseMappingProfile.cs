@@ -22,7 +22,12 @@ namespace swiftcarpenterApi.Services.Mappings
                  
                   .ForMember(
                          dest => dest.Total,
-                         opt => opt.MapFrom(src => src.DetailQuotes.Sum(dq => dq.Subtotal)));
+                         opt => opt.MapFrom(src => src.DetailQuotes.Sum(dq => dq.Subtotal)))
+                  .ForMember(
+                
+                    dest => dest.Status,
+                    opt => opt.MapFrom( src => src.StatusQuote ? "Aceptado" : "Pendiente")
+                );
                 
 
 
@@ -72,6 +77,16 @@ namespace swiftcarpenterApi.Services.Mappings
 
             CreateMap<Customer, CustomerResponseDTO>();
 
+            CreateMap<ProductType, ProductTypeDTO>();
+
+            CreateMap<Material, MaterialDTO>();
+            
+            CreateMap<Color,  ColorResponseDTO>();
+
+            CreateMap<Size, SizeResponseDTO>();
+                //.ForMember( dest => dest.SizeDescription, opt => opt.MapFrom(src => src.Products.Select(
+                //    p => p.ProductType.DescriptionSize).FirstOrDefault()));
+              
 
 
 

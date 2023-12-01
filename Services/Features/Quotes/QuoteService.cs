@@ -1,6 +1,8 @@
-﻿using SwiftCarpenter.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SwiftCarpenter.Domain.Entities;
 using swiftcarpenterApi.Infraestructure.Data.Configurations;
 using swiftcarpenterApi.Infraestructure.Repositories;
+using System.Runtime.InteropServices;
 
 namespace swiftcarpenterApi.Services.Features.Quotes
 {
@@ -18,6 +20,23 @@ namespace swiftcarpenterApi.Services.Features.Quotes
         {
             return await _quoteRepository.GetAll();
         }
+
+        //Optiene las cotizaciones en estado pendiente
+        public async Task<IEnumerable<Quote>> GetStatusAll(int id)
+        {
+            var quotes = await _quoteRepository.GetStatusAll(id);
+
+            return quotes;
+            
+        }
+
+        public async Task<IEnumerable<Quote>> GetStatus(int id)
+        {
+            var quotes = await _quoteRepository.GetStatus(id);
+
+            return quotes;
+        }
+
 
         public async Task<Quote> GetById( int id)
         {

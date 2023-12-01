@@ -17,6 +17,7 @@ namespace swiftcarpenterApi.Infraestructure.Data.Configurations
                 builder.Property(e => e.TypeName)
                     .HasMaxLength(255)
                     .HasColumnName("typeName");
+            builder.Property(e => e.ImgProductTypes).HasMaxLength(255).HasColumnName("imgProductTypes");
            
 
 

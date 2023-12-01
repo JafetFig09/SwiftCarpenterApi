@@ -9,5 +9,7 @@ public partial class Material
 
     public string MaterialName { get; set; } = null!;
 
+    public string? ImgMaterial {  get; set; }
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

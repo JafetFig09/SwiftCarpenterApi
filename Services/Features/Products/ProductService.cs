@@ -1,5 +1,7 @@
-﻿using SwiftCarpenter.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SwiftCarpenter.Domain.Entities;
 using swiftcarpenterApi.Infraestructure.Repositories;
+using System.Runtime.InteropServices;
 
 namespace swiftcarpenterApi.Services.Features.Products
 {
@@ -17,6 +19,32 @@ namespace swiftcarpenterApi.Services.Features.Products
         {
             return await _productRepository.GetAll();   
             
+        }
+
+        public async Task<IEnumerable<ProductType>> GetAllProductType()
+        {
+            return await _productRepository.GetProductType();
+        }
+        public async Task<IEnumerable<Material>> GetMaterialAll()
+        {
+            var material = await _productRepository.GetMaterialAll();
+
+            return material;
+        }
+
+        public async Task<IEnumerable<Size>> GetSizesAll()
+        {
+            return await _productRepository.GetSizesAll();
+        }
+
+        public async Task<IEnumerable<Size>> GetSizeAll()
+        {
+            return await _productRepository.GetSizesAll();
+        }
+
+        public async Task<IEnumerable<Color>> GetColorAll()
+        {
+            return await _productRepository.GetColorAll();
         }
 
         public async Task<Product> GetById( int id)

@@ -22,6 +22,7 @@ namespace swiftcarpenterApi.Infraestructure.Data.Configurations
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK__Quotes__customer__49C3F6B7");
             builder.Property(e => e.SaleDate).HasColumnName("saleDate");
+            builder.Property(e => e.StatusQuote).HasColumnName("statusQuote");
             
         }
     }

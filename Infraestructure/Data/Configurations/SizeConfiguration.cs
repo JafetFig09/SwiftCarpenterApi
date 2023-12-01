@@ -17,6 +17,9 @@ namespace swiftcarpenterApi.Infraestructure.Data.Configurations
                 builder.Property(e => e.SizeName)
                     .HasMaxLength(255)
                     .HasColumnName("sizeName");
+            builder.Property(e => e.High).HasColumnName("high");
+            builder.Property(e => e.Width).HasColumnName("width");
+            builder.Property(e => e.Lenght).HasColumnName("length");
           
 
         }

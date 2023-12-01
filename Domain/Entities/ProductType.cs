@@ -9,6 +9,7 @@ public partial class ProductType
 
     public string TypeName { get; set; } = null!;
 
+    public string? ImgProductTypes { get; set; }
     public string DescriptionSize { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();

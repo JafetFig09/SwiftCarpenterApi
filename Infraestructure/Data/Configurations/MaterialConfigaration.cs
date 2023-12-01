@@ -16,6 +16,7 @@ namespace swiftcarpenterApi.Infraestructure.Data.Configurations
                 builder.Property(e => e.MaterialName)
                     .HasMaxLength(255)
                     .HasColumnName("materialName");
+            builder.Property(e => e.ImgMaterial).HasColumnName("imgMaterial");
           
 
 

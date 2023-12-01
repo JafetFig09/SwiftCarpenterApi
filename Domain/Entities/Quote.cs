@@ -13,6 +13,8 @@ public partial class Quote
 
     public DateTime? SaleDate { get; set; }
 
+    public bool StatusQuote { get; set; }
+
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual ICollection<DetailQuote> DetailQuotes { get; set; } = new List<DetailQuote>();

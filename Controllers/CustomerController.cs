@@ -23,8 +23,7 @@ namespace swiftcarpenterApi.Controllers
             this._quoteService = quoteService;
         }
 
-        //Optiene los datos del cliente
-        [HttpGet("{Customerid:int}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdCustomeer(int id)
         {
             var customer = await _customerService.GetById(id);
@@ -38,7 +37,7 @@ namespace swiftcarpenterApi.Controllers
         }
 
         //Optiene todas las cotizaciones del Cliente
-        [HttpGet("{customerid:int}/Quotes")]
+        [HttpGet("{id:int}/Quotes")]
         public async Task<IActionResult> GetById(int id)
         {
             var customer = await _customerService.GetById(id);
@@ -50,6 +49,8 @@ namespace swiftcarpenterApi.Controllers
             var dtoCustomer = _mapper.Map<CustomerDTO>(customer);
             return Ok(dtoCustomer);
         }
+
+
 
         //Optiene una cotización especifica del cliente
 
@@ -72,6 +73,36 @@ namespace swiftcarpenterApi.Controllers
 
             var dtoQuote = _mapper.Map<QuoteDTO>(quote);
             return Ok(dtoQuote);
+        }
+
+
+
+
+        //Cotizaciones Pendientes
+
+        [HttpGet("{customerId:int}/Quotes/Pendientes")]
+        public async Task<IActionResult> GetQuotesPendientes( int customerId)
+        {
+
+            var quotesStatus = await _quoteService.GetStatusAll( customerId );
+
+            var quotesStatusDTO = _mapper.Map<IEnumerable<QuoteDTO>>(quotesStatus);
+
+            return Ok(quotesStatusDTO);
+        }
+
+        [HttpGet("{customerId:int}/Quotes/Acetadas")]
+        public async Task<IActionResult> GetQuotesAceptadas(int customerId)
+        {
+
+            var quotesStatus = await _quoteService.GetStatus(customerId);
+
+            var quotesStatusDTO = _mapper.Map<IEnumerable<QuoteDTO>>(quotesStatus);
+
+            if(quotesStatusDTO.Count() != 0)
+                return Ok(quotesStatusDTO);
+
+            return BadRequest();
         }
 
 

@@ -17,6 +17,7 @@ namespace swiftcarpenterApi.Infraestructure.Data.Configurations
                 builder.Property(e => e.ColorName)
                     .HasMaxLength(255)
                     .HasColumnName("colorName");
+            builder.Property(e => e.HexadecimalCode).HasColumnName("hexadecimalCode");
            
         }
     }

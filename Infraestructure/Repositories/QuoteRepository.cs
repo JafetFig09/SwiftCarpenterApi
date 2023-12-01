@@ -37,6 +37,25 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
             return quote ?? new Quote();
         }
 
+        public async Task<IEnumerable<Quote>> GetStatusAll(int id)
+        {
+            var quote = await _context.Quotes.Where(q => q.CustomerId == id && q.StatusQuote == false).
+                Include(q => q.Customer).Include(q => q.DetailQuotes).ThenInclude( dq => dq.Product.ProductType).ToListAsync();
+
+            return quote;
+        }
+
+        public async Task<IEnumerable<Quote>> GetStatus(int id)
+        {
+            var quote = await _context.Quotes.Where(q => q.CustomerId == id && q.StatusQuote == true).
+                Include(q => q.Customer).Include(q => q.DetailQuotes).ThenInclude(dq => dq.Product.ProductType).ToListAsync();
+
+            return quote;
+        }
+
+
+
+
 
         public async Task Add(Quote quote)
         {
