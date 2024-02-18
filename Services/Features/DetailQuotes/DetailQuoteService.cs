@@ -15,7 +15,7 @@ namespace swiftcarpenterApi.Services.Features.DetailQuotes
 
         public async Task<IEnumerable<DetailQuote>> GetAll()
         {
-            return await  _detailQuoteRepository.GetAll();
+            return await _detailQuoteRepository.GetAll();
         }
 
 
@@ -24,28 +24,28 @@ namespace swiftcarpenterApi.Services.Features.DetailQuotes
             return await _detailQuoteRepository.GetById(id);
         }
 
-        public async Task Add( DetailQuote detail)
+        public async Task Add(DetailQuote detail)
         {
             await _detailQuoteRepository.Add(detail);
         }
 
-        public async Task Update( DetailQuote detailQuoteUpdate)
+        public async Task Update(DetailQuote detailQuoteUpdate)
         {
-            var detailQuote = await _detailQuoteRepository.GetById( detailQuoteUpdate.Id);
+            var detailQuote = await _detailQuoteRepository.GetById(detailQuoteUpdate.Id);
 
-            if (detailQuote.Id > 0 ) 
+            if (detailQuote.Id > 0)
             {
                 await _detailQuoteRepository.Update(detailQuoteUpdate);
             }
         }
 
-        public async Task Delete( int id)
+        public async Task Delete(int id)
         {
-            var detailQuote = await _detailQuoteRepository.GetById( id);
+            var detailQuote = await _detailQuoteRepository.GetById(id);
 
-            if( detailQuote.Id > 0 ) 
+            if (detailQuote.Id > 0)
             {
-                await _detailQuoteRepository.Delete( id );
+                await _detailQuoteRepository.Delete(id);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace swiftcarpenterApi.Domain.Dtos
     public class UserCredential
     {
         [Required]
-        [EmailAddress] 
+        [EmailAddress]
         public string? Email { get; set; }
 
         [Required]

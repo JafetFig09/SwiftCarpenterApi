@@ -122,27 +122,27 @@ namespace swiftcarpenterApi.Controllers
 
 
 
-        [HttpPut("{id:int}/Quotes/{quoteId:int}/Comprar")]
-        public async Task<IActionResult> Update(int id, int quoteId, QuoteUpdateDTO quoteUpdateDTO)
-        {
-            var customer = await _customerService.GetById(id);
+        //[HttpPut("{id:int}/Quotes/{quoteId:int}/Comprar")]
+        //public async Task<IActionResult> Update(int id, int quoteId, QuoteUpdateDTO quoteUpdateDTO)
+        //{
+        //    var customer = await _customerService.GetById(id);
 
-            if (id != customer.Id)
-            {
-                return BadRequest();
-            }
+        //    if (id != customer.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var quote = await _quoteService.GetById(quoteId);
+        //    var quote = await _quoteService.GetById(quoteId);
 
-            if (quote == null)
-                return BadRequest();
+        //    if (quote == null)
+        //        return BadRequest();
 
-            var quoteUpdate = _mapper.Map(quoteUpdateDTO, quote);
+        //    var quoteUpdate = _mapper.Map(quoteUpdateDTO, quote);
 
 
-            await _quoteService.Update(quoteUpdate);
-            return NoContent();
-        }
+        //    await _quoteService.Update(quoteUpdate);
+        //    return NoContent();
+        //}
 
 
 

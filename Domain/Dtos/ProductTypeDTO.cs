@@ -8,7 +8,8 @@
 
         public string? ImgProductTypes { get; set; }
 
-        
+
+
 
     }
 }

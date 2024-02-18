@@ -78,15 +78,17 @@ namespace swiftcarpenterApi.Services.Mappings
             CreateMap<Customer, CustomerResponseDTO>();
 
             CreateMap<ProductType, ProductTypeDTO>();
+                //.ForMember(dest => dest.Products, opt => opt.Ignore())
+                // .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products));
+
 
             CreateMap<Material, MaterialDTO>();
             
             CreateMap<Color,  ColorResponseDTO>();
 
             CreateMap<Size, SizeResponseDTO>();
-                //.ForMember( dest => dest.SizeDescription, opt => opt.MapFrom(src => src.Products.Select(
-                //    p => p.ProductType.DescriptionSize).FirstOrDefault()));
-              
+            
+            CreateMap<FinishType , FinishTypeDTO>();
 
 
 

@@ -55,13 +55,14 @@ namespace swiftcarpenterApi.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost("CreateQuote")]
         public async Task<IActionResult> Add(QuoteCreateDTO quoteCreate)
         {
             var entity = new Quote
             {
                 CustomerId = quoteCreate.CustomerId,
                 DateQuote = DateTime.Now,
+                StatusQuote = false,
                 DetailQuotes = quoteCreate.DetailQuotes.Select(dto => new DetailQuote
                 {
                     ProductId = dto.ProductId,

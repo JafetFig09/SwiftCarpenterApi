@@ -44,6 +44,19 @@ namespace swiftcarpenterApi.Controllers
             return Ok(dto);
         }
 
+
+        [HttpGet("getProduct")]
+        public async Task<IActionResult> GetId(int productTypeId, int sizeId, int materialId, int finishTypeId, int colorId)
+        {
+            var product = await _productService.GetId(productTypeId, sizeId,  materialId, finishTypeId,  colorId);
+
+            if (product.Id <= 0)
+            {
+                return NotFound();
+            }
+            var productDTO = _mapper.Map<ProductDTO>(product);
+            return Ok(productDTO);
+        }
         //CATALOGOS
         [HttpGet("ProductType")]
         public async Task<IActionResult> GetTypeProductAll()
@@ -81,6 +94,15 @@ namespace swiftcarpenterApi.Controllers
             return Ok(colorDTO);
         }
 
+        [HttpGet("FinishType")]
+        public async Task<IActionResult> GetFinishTypeAll()
+        {
+            var finishType = await _productService.GetFinishTypes();
+            var finishTypeDTO = _mapper.Map<IEnumerable<FinishTypeDTO>>(finishType);
+
+            return Ok(finishTypeDTO);
+        }
+
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, Product product)
         {
@@ -93,12 +115,6 @@ namespace swiftcarpenterApi.Controllers
             return NoContent();
         }
 
-        //[HttpDelete("{id:int}")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    await _productService.Delete(id);
-        //    return NoContent();
-
-        //}
+       
     }
 }

@@ -17,62 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen( c =>
-//{
-//    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-//    {
-//        Name = "Authorization",
-//        Type = SecuritySchemeType.ApiKey,
-//        Scheme = "Bearer",
-//        BearerFormat = "JWT",
-//        In = ParameterLocation.Header
-//    });
 
-//    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-//    {
-//        new OpenApiSecurityScheme
-//        {
-//            Reference = new OpenApiReference
-//            {
-//                Type = ReferenceType.SecurityScheme,
-//                Id = "Bearer"
 
-//            }
-//        },
-//        new String[]{}
-//    }) ;
 
-//});
-
-builder.Services.AddSwaggerGen(c =>
-{
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-});
+builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddAutoMapper(typeof(ResponseMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(RequestCreateMappingProfile).Assembly);
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().
     AddEntityFrameworkStores<SwiftCarpenterDbContext>().
@@ -83,7 +35,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().
 var Configuration = builder.Configuration;
 
 builder.Services.AddScoped<ProductService>();
-builder.Services.AddAutoMapper(typeof(RequestCreateMappingProfile).Assembly);
+
 
 builder.Services.AddTransient<ProductRepository>();
 builder.Services.AddScoped<QuoteService>();
@@ -93,6 +45,19 @@ builder.Services.AddTransient<DetailQuoteRepository>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddTransient<CustomerRepository>();
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("_myAllowSpecificOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+                  
+        });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
@@ -116,15 +81,13 @@ builder.Services.AddDbContext<SwiftCarpenterDbContext>(
 
 var app = builder.Build();
 
+app.UseCors("_myAllowSpecificOrigins");
 app.UseSwagger();
-
 app.UseSwaggerUI();
-
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

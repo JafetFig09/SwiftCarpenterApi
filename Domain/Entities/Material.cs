@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SwiftCarpenter.Domain.Entities;
+﻿namespace SwiftCarpenter.Domain.Entities;
 
 public partial class Material
 {
@@ -9,7 +6,7 @@ public partial class Material
 
     public string MaterialName { get; set; } = null!;
 
-    public string? ImgMaterial {  get; set; }
+    public string? ImgMaterial { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

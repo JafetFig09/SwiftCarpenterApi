@@ -8,8 +8,8 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
     {
         private readonly SwiftCarpenterDbContext _context;
 
-        public QuoteRepository(SwiftCarpenterDbContext context) 
-        { 
+        public QuoteRepository(SwiftCarpenterDbContext context)
+        {
             this._context = context;
         }
 
@@ -18,7 +18,7 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
             var quotes = await _context.Quotes
                 .Include(x => x.Customer)
                 .Include(x => x.DetailQuotes)
-                .ThenInclude(dq => dq.Product.ProductType) 
+                .ThenInclude(dq => dq.Product.ProductType)
                 .ToListAsync();
 
             return quotes;
@@ -33,14 +33,14 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
                  .ThenInclude(dq => dq.Product.ProductType).
                   FirstOrDefaultAsync(q => q.Id == id);
 
-           
+
             return quote ?? new Quote();
         }
 
         public async Task<IEnumerable<Quote>> GetStatusAll(int id)
         {
             var quote = await _context.Quotes.Where(q => q.CustomerId == id && q.StatusQuote == false).
-                Include(q => q.Customer).Include(q => q.DetailQuotes).ThenInclude( dq => dq.Product.ProductType).ToListAsync();
+                Include(q => q.Customer).Include(q => q.DetailQuotes).ThenInclude(dq => dq.Product.ProductType).ToListAsync();
 
             return quote;
         }

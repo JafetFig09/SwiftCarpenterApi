@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SwiftCarpenter.Domain.Entities;
+﻿using SwiftCarpenter.Domain.Entities;
 using swiftcarpenterApi.Infraestructure.Repositories;
-using System.Runtime.InteropServices;
 
 namespace swiftcarpenterApi.Services.Features.Products
 {
@@ -9,7 +7,7 @@ namespace swiftcarpenterApi.Services.Features.Products
     {
         private readonly ProductRepository _productRepository;
 
-        public ProductService(ProductRepository productRepository) 
+        public ProductService(ProductRepository productRepository)
         {
             this._productRepository = productRepository;
         }
@@ -17,8 +15,8 @@ namespace swiftcarpenterApi.Services.Features.Products
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _productRepository.GetAll();   
-            
+            return await _productRepository.GetAll();
+
         }
 
         public async Task<IEnumerable<ProductType>> GetAllProductType()
@@ -47,21 +45,29 @@ namespace swiftcarpenterApi.Services.Features.Products
             return await _productRepository.GetColorAll();
         }
 
-        public async Task<Product> GetById( int id)
+        public async Task<Product> GetById(int id)
         {
             return await _productRepository.GetById(id);
         }
 
-        public async Task Add( Product product)
+        public async Task<IEnumerable<FinishType>> GetFinishTypes()
+        {
+            return await _productRepository.GetFinishType();
+        }
+        public async Task<Product> GetId(int productTypeId, int sizeId, int materialId, int finishTypeId, int colorId)
+        {
+            return await _productRepository.GetId(productTypeId, sizeId, materialId, finishTypeId, colorId);
+        }
+        public async Task Add(Product product)
         {
             await _productRepository.Add(product);
         }
 
-        public async Task Update( Product productUpdate)
+        public async Task Update(Product productUpdate)
         {
             var product = await GetById(productUpdate.Id);
 
-            if(product.Id > 0) 
+            if (product.Id > 0)
             {
                 await _productRepository.Update(productUpdate);
             }

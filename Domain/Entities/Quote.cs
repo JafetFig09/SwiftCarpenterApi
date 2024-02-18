@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SwiftCarpenter.Domain.Entities;
+﻿namespace SwiftCarpenter.Domain.Entities;
 
 public partial class Quote
 {

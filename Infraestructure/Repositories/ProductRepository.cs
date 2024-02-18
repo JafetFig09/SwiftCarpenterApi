@@ -2,6 +2,8 @@
 using SwiftCarpenter.Domain.Entities;
 using SwiftCarpenter.Infraestructure.Data;
 using System.Runtime.InteropServices;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace swiftcarpenterApi.Infraestructure.Repositories
 {
@@ -27,11 +29,19 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
         }
         public async Task<IEnumerable<ProductType>> GetProductType()
         {
-            var productType = await _context.ProductTypes.ToListAsync();
+            var productTypes = await _context.ProductTypes.ToListAsync();
+          
 
-            return productType;
+            return productTypes;
+
+           
         }
-
+        public async Task<IEnumerable<FinishType>> GetFinishType()
+        {
+            var finishType = await _context.FinishTypes.ToListAsync(); 
+            
+            return finishType;
+        }
         public async Task<IEnumerable<Material>> GetMaterialAll()
         {
             var material = await _context.Materials.ToListAsync();
@@ -64,6 +74,21 @@ namespace swiftcarpenterApi.Infraestructure.Repositories
                 Include(x => x.FinishType).FirstOrDefaultAsync(p => p.Id == id);
 
             return product ?? new Product();
+        }
+
+        public async Task<Product> GetId(int productTypeId, int sizeId, int materialId, int finishTypeId, int colorId)
+        {
+            var product = await _context.Products.Include(p => p.Material).Include(p => p.ProductType).Include(p => p.Color).
+                            Include(p => p.Size).Include( p => p.FinishType)
+                            .FirstOrDefaultAsync(p => p.ProductTypeId == productTypeId &&
+                             p.SizeId == sizeId &&
+                             p.MaterialId == materialId &&
+                             p.FinishTypeId == finishTypeId &&
+                             p.ColorId == colorId);
+
+            return product ?? new Product();
+
+
         }
 
         public async Task Add( Product product)
